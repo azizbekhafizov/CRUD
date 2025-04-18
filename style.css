@@ -1,5 +1,5 @@
 .container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: auto;
   background: #fff;
   padding: 20px;
@@ -42,6 +42,7 @@ button {
 table {
   width: 100%;
   border-collapse: collapse;
+
 }
 
 th,
@@ -50,6 +51,7 @@ td {
   padding: 8px;
   text-align: center;
 }
+
 
 .modal {
   display: none;
