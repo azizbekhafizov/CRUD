@@ -56,16 +56,7 @@ form.addEventListener("submit", e => {
   saveData();
 });
 
-function editFn(index) {
-  selected = index;
-  const item = dataList[index];
-  form.firstName.value = item.firstName;
-  form.lastName.value = item.lastName;
-  form.datePupil.value = item.date;
-  form.salaryPupil.value = item.salary;
-  form.isMarried.checked = item.isMarried;
-  showModal();
-}
+
 
 function deleteData(index) {
   if (confirm("Haqiqatan ham o'chirmoqchimisiz?")) {
