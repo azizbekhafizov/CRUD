@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oddiy Dastur</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="top-bar">
+      <input type="text" id="search" placeholder="Ism yoki Familiya">
+      <button id="addBtn">Qo'shish</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Ism</th>
+          <th>Familiya</th>
+          <th>Tug'ilgan kuni</th>
+          <th>Maosh</th>
+          <th>Uylanganmi</th>
+          <th>Amallar</th>
+        </tr>
+      </thead>
+      <tbody id="pupilTable"></tbody>
+    </table>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Ma'lumot qo'shish</h2>
+      <form id="pupilForm">
+        <input type="text" id="firstName" placeholder="Ism" required>
+        <input type="text" id="lastName" placeholder="Familiya" required>
+        <input type="date" id="datePupil" required>
+        <input type="number" id="salaryPupil" placeholder="Maosh" required>
+        <label>
+          <input type="checkbox" id="isMarried"> Uylanganmi
+        </label>
+        <div class="btns">
+          <button type="submit">Saqlash</button>
+          <button type="button" id="closeModal">Bekor qilish</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+</html>
