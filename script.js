@@ -1,53 +1,45 @@
-let pupils = JSON.parse(localStorage.getItem("pupils")) || [];
+let dataList = JSON.parse(localStorage.getItem("dataList")) || [];
 let selected = null;
-
-const table = document.getElementById("pupilTable");
-const form = document.getElementById("pupilForm");
+const table = document.getElementById("table");
+const form = document.getElementById("form");
 const modal = document.getElementById("modal");
 const addBtn = document.getElementById("addBtn");
 const closeModal = document.getElementById("closeModal");
 const searchInput = document.getElementById("search");
 
-function showModal() {
-  modal.style.display = "flex";
-}
-
-function hideModal() {
+const showModal = () => modal.style.display = "flex";
+const hideModal = () => {
   modal.style.display = "none";
   form.reset();
   selected = null;
-}
+};
 
-function renderTable(data = pupils) {
-  table.innerHTML = "";
-  data.forEach((pupil, i) => {
-    let row = `
-      <tr>
-        <td>${i + 1}</td>
-        <td>${pupil.firstName}</td>
-        <td>${pupil.lastName}</td>
-        <td>${pupil.date}</td>
-        <td>${pupil.salary}</td>
-        <td>${pupil.isMarried ? "Ha" : "Yo'q"}</td>
-        <td>
-          <button onclick="editPupil(${i})">Tahrirlash</button>
-          <button onclick="deletePupil(${i})">O'chirish</button>
-        </td>
-      </tr>
-    `;
-    table.innerHTML += row;
-  });
-}
+const renderTable = (list = dataList) => {
+  table.innerHTML = list.map((data, i) => `
+    <tr>
+      <td>${i + 1}</td>
+      <td>${data.firstName}</td>
+      <td>${data.lastName}</td>
+      <td>${data.date}</td>
+      <td>${data.salary}</td>
+      <td>${data.isMarried ? "Ha" : "Yo'q"}</td>
+      <td>
+        <button onclick="editFn(${i})">Tahrirlash</button>
+        <button onclick="deleteData(${i})">O'chirish</button>
+      </td>
+    </tr>
+  `).join('');
+};
 
-function saveData() {
-  localStorage.setItem("pupils", JSON.stringify(pupils));
+const saveData = () => {
+  localStorage.setItem("dataList", JSON.stringify(dataList));
   renderTable();
   hideModal();
-}
+};
 
-form.addEventListener("submit", function (e) {
+form.addEventListener("submit", e => {
   e.preventDefault();
-  const newPupil = {
+  const newData = {
     firstName: form.firstName.value,
     lastName: form.lastName.value,
     date: form.datePupil.value,
@@ -56,28 +48,28 @@ form.addEventListener("submit", function (e) {
   };
 
   if (selected !== null) {
-    pupils[selected] = newPupil;
+    dataList[selected] = newData;
   } else {
-    pupils.push(newPupil);
+    dataList.push(newData);
   }
 
   saveData();
 });
 
-function editPupil(index) {
+function editFn(index) {
   selected = index;
-  const pupil = pupils[index];
-  form.firstName.value = pupil.firstName;
-  form.lastName.value = pupil.lastName;
-  form.datePupil.value = pupil.date;
-  form.salaryPupil.value = pupil.salary;
-  form.isMarried.checked = pupil.isMarried;
+  const item = dataList[index];
+  form.firstName.value = item.firstName;
+  form.lastName.value = item.lastName;
+  form.datePupil.value = item.date;
+  form.salaryPupil.value = item.salary;
+  form.isMarried.checked = item.isMarried;
   showModal();
 }
 
-function deletePupil(index) {
+function deleteData(index) {
   if (confirm("Haqiqatan ham o'chirmoqchimisiz?")) {
-    pupils.splice(index, 1);
+    dataList.splice(index, 1);
     saveData();
   }
 }
@@ -86,15 +78,12 @@ addBtn.addEventListener("click", showModal);
 closeModal.addEventListener("click", hideModal);
 
 searchInput.addEventListener("input", function () {
-  let value = this.value.toLowerCase();
-  let filtered = pupils.filter(p =>
-    p.firstName.toLowerCase().includes(value) ||
-    p.lastName.toLowerCase().includes(value)
+  const val = this.value.toLowerCase();
+  const filtered = dataList.filter(item =>
+    item.firstName.toLowerCase().includes(val) ||
+    item.lastName.toLowerCase().includes(val)
   );
   renderTable(filtered);
 });
 
 renderTable();
-
-
-

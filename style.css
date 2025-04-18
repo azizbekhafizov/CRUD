@@ -25,14 +25,18 @@ button {
   font-size: 16px;
 }
 
+.top-bar input{
+  width: 70%;
+}
+
+input{
+  outline: none;
+}
+
 button {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
 }
 
 table {
@@ -47,7 +51,6 @@ td {
   text-align: center;
 }
 
-/* Modal */
 .modal {
   display: none;
   position: fixed;
